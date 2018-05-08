@@ -28,7 +28,7 @@ class GroovyListener extends Thread implements MessageListener{
 	String outText=""
 	public void run() {
 		// Create a ConnectionFactory
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://DAL-CONT056-9W7:61616");
+		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 
 		// Create a Connection
 		Connection connection = connectionFactory.createConnection();
@@ -40,11 +40,11 @@ class GroovyListener extends Thread implements MessageListener{
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
 		// Create the destination (Topic or Queue)
-		Destination destination = session.createQueue("MAIN.FOO");
+		Destination destination = session.createQueue("BRANCH.FOO");
 
 		// Create a MessageConsumer from the Session to the Topic or Queue
 		MessageConsumer consumer = session.createConsumer(destination);
-		Message message = consumer.receive(50000);
+		Message message = null;
 		while(true){
 			TextMessage response =null
 			try {
@@ -52,7 +52,7 @@ class GroovyListener extends Thread implements MessageListener{
 				//println 'idle'
 				
 				// Wait for a message
-				message = consumer.receive(50000);
+				message = consumer.receive(5000);
 				
 				response = session.createTextMessage();
 				if (message instanceof TextMessage) {
@@ -79,7 +79,7 @@ class GroovyListener extends Thread implements MessageListener{
 			}catch (Exception e) {
 				System.out.println("Caught: " + e);
 				e.printStackTrace();
-				response.setText("ERROR");
+				response.setText('"ERROR"');
 				//response.setText("RESULT is XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 				//Set the correlation ID from the received message to be the correlation id of the response message
 				//this lets the client identify which message this is a response to if it has more than
@@ -94,7 +94,7 @@ class GroovyListener extends Thread implements MessageListener{
 				continue;
 			}
 
-			sleep(500);
+			sleep(50);
 		}
 
 

@@ -6,7 +6,7 @@ import org.trs.data.domain.model.labels.Posts
 
 class SessionCatalog  {
 	
-	static AppModel app = new AppModel("Nightly&");
+	static AppModel app = new AppModel("Daily&");
 	
 	public static setScenario(String name){
 		app= new AppModel();				

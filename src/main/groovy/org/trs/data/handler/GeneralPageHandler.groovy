@@ -2,13 +2,13 @@ package org.trs.data.handler
 
 import groovy.text.SimpleTemplateEngine
 
-import org.trs.data.domain.svc.SessionCatalog
+import org.trs.data.domain.svc.SessionContext
 import org.trs.itf.svc.PageService
 
 
 
 
-class ContentHandler {
+class GeneralPageHandler {
 	
 	def resolvePage(String pageName){
 		String expression =pageName;
@@ -31,8 +31,8 @@ class ContentHandler {
 		String pageText = reader.readUpPage(moduleName, pageName)
 		def engine = new SimpleTemplateEngine()
 		
-		def binding =SessionCatalog.app.getViewData()
-		println('currentViewData PageHandler says'+binding.toString()) 
+		def binding =SessionContext.app.getViewData()
+		//println('currentViewData PageHandler says'+binding.toString()) 
 	
 		
 		def template = engine.createTemplate(pageText).make(binding)

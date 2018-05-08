@@ -12,7 +12,6 @@ class Posts extends BaseModel {
 	//datastore of various properties
 	 def posts=		['post 1','post 2','post 3','post 4','post 5','post 6']
 	 def posts_2=	['post 1','post 2','post 3','post 4','post 5','post 6']
-	 def posts_AT=	['post 1','post 2','post 3','post 4','post 5','post 6']
 	
 	//actual exposed data
 	 def currentPosts=posts
@@ -23,8 +22,8 @@ class Posts extends BaseModel {
 	def activeposts;
 	
 	public Posts setState(StateExpressionWrapper event){
-		if(event.getName().equals("AT")){
-			activeposts=posts_AT
+		if(event.getName().equals("v1")){
+			activeposts=posts
 		}else{
 			activeposts=posts_2
 		}

@@ -1,10 +1,8 @@
 package org.trs.data.handler
 
-import groovy.text.SimpleTemplateEngine
-
-import org.trs.data.domain.svc.SessionCatalog
+import org.trs.data.domain.svc.SessionContext
 import org.trs.itf.model.StateExpressionWrapper
-import org.trs.itf.svc.PageReader
+import org.trs.itf.svc.PageService
 
 
 
@@ -18,7 +16,7 @@ class EventHandler {
 		def actorName
 		def eventExpression=expression
 		//.substring(0,expression.indexOf("?"))
-		PageReader reader = new PageReader();
+		PageService reader = new PageService();
 		if(expression.contains("/")){//TODO should split only based on first index, because event expressions may contian slashes?? anyway to review here.
 			String[] arr_pageName=expression.split("/");
 			int len = arr_pageName.length;
@@ -35,9 +33,9 @@ class EventHandler {
 		char lowerCaseFirt=actorName.charAt(0).toLowerCase()		
 		actorName=""+lowerCaseFirt+actorName.substring(1)
 		
-		actor=SessionCatalog.app[actorName]
-		//actor=SessionCatalog.app.getEventListActor()
-		//actor = SessionCatalog.app.getModelToReturn()
+		actor=SessionContext.app[actorName]
+		//actor=SessionContext.app.getEventListActor()
+		//actor = SessionContext.app.getModelToReturn()
 		actor.setState(new StateExpressionWrapper(eventExpression+""));
 	
 	}

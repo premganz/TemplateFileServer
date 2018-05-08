@@ -1,13 +1,13 @@
 package org.trs.data.domain.model.ifs
 
-import org.trs.data.domain.model.labels.Posts
+import org.trs.data.domain.model.listener.ReceptionGuide
 import org.trs.itf.model.StateExpressionWrapper
 
 class AppModel extends BaseModel{
-
+	boolean initialized
 	
-	Posts posts
-	
+	MenuLabels menuLabels;
+	ChronoRange chronoRange;
 	String baseLookupDir;
 	BaseModel modelToReturn
 	
@@ -15,6 +15,7 @@ class AppModel extends BaseModel{
 	//Actors
 	
 	 
+	 ReceptionGuide receptionGuide
 	@Override
 	public BaseModel setState(StateExpressionWrapper event) {
 		// TODO Auto-generated method stub
@@ -23,18 +24,15 @@ class AppModel extends BaseModel{
 
 	public AppModel(String exp){
 		
-			lastEvent=exp
-			StateExpressionWrapper defWrap = new StateExpressionWrapper(exp)
-		
-			posts= new Posts().setState(defWrap);
-		
+			
 	}
 	@Override
 	public Map getViewData() {
 		//	Properties members = this.getMetaClass().getProperties()
 		//	while (this.MetaClass getMetaClass().getPro)
 		//	}
-		return posts.getViewData()
+		return menuLabels.getViewData()+receptionGuide.getViewData()+chronoRange.getViewData()
+	
 	}
 	
 	@Override
