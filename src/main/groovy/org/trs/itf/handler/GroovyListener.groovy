@@ -16,10 +16,9 @@ import javax.xml.bind.JAXBContext
 import javax.xml.bind.JAXBException
 import javax.xml.bind.Unmarshaller
 
-import org.apache.activemq.ActiveMQConnectionFactory
+
 import org.trs.itf.model.DomainMessage
-
-
+import org.apache.activemq.ActiveMQConnectionFactory
 
 
 
